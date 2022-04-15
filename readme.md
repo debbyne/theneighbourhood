@@ -1,4 +1,4 @@
-# AWARDS
+# THE NEIGHBOURHOOD
 
 # Author
 Debbyne Kinya
