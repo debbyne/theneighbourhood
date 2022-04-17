@@ -1,3 +1,4 @@
+import email
 from django.db import models
 from django.contrib.auth.models import User
 from unicodedata import name
@@ -33,6 +34,7 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
      name=models.CharField(max_length=50, blank=True)
+     email=models.CharField(max_length=50, blank=True)
      user=models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
      location =models.CharField(max_length=50, blank=True)
      neighbourhood_name =  models.CharField(max_length=50, blank=True)
