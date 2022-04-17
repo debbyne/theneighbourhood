@@ -34,7 +34,7 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
      name=models.CharField(max_length=50, blank=True)
-     email=models.CharField(max_length=50, blank=True)
+     email=models.EmailField(max_length=50, blank=True)
      user=models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
      location =models.CharField(max_length=50, blank=True)
      neighbourhood_name =  models.CharField(max_length=50, blank=True)
@@ -92,6 +92,7 @@ class Business(models.Model):
      contact = models.IntegerField(default=0,max_length=50, blank=True)
      image = CloudinaryField('image')
      neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='member',blank=True)
+     email=models.EmailField(max_length=50, blank=True)
 
 
      def __str__(self):
