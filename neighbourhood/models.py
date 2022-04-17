@@ -7,12 +7,37 @@ from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
 import datetime as dt
 # Create your models here.
+class Neighbourhood(models.Model):
+    name=models.CharField(max_length=50, blank=True)
+    location =models.CharField(max_length=50, blank=True)
+    image = CloudinaryField('image')
+    description = models.TextField(max_length=1000, null=True)
+    occupants_count = models.IntegerField(default=0)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def _str_(self):
+        return self.name
+    def create_neighbourhood(self):
+        self.save()
+
+    def delete_neighbourhood(self):
+        self.delete()
+
+    @classmethod
+    def find_neighbourhood(cls, id):
+        return cls.objects.filter(id=id)
+    @classmethod
+    def update_neighbourhood(cls, id ,name):
+        return cls.objects.filter(id=id).update()
+
 
 class Profile(models.Model):
      name=models.CharField(max_length=50, blank=True)
      user=models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
      location =models.CharField(max_length=50, blank=True)
      neighbourhood_name =  models.CharField(max_length=50, blank=True)
+     house=models.CharField(max_length=50, blank=True)
+     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='member',blank=True)
      def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -43,55 +68,38 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 class Post(models.Model):
-    image = CloudinaryField('image')
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True)
     title=models.CharField(max_length=30, blank=True)
-    time_posted=models.DateTimeField(auto_now_add=True, null=True)
-    description = models.TextField(max_length=1000, null=True)
-    url = models.URLField(max_length=100, null=True)
-    class Meta:
-        ordering = ["-pk"]
-
-    def save_project(self):
-        self.save()
-
-    def delete_project(self):
-        self.delete()
+    post = models.TextField()
+    date= models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="owner")
+    hood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE,related_name="post")
 
     def __str__(self):
         return self.title
 
-    @classmethod 
-    def get_project_by_user(cls, user):
-        images = cls.objects.filter(user=user)
-        return images
-    def update_project(self, title, description,image):
-        self.title = title
-        self.description = description
-        self.image = image
-        self.save()
-
-    @classmethod
-    def get_all_projects(cls):
-        projects = Post.objects.all()
-        return projects
-
     @classmethod
     def search_project_name(cls, search_term):
-        images = cls.objects.filter(
+        return cls.objects.filter(
         title__icontains=search_term)
-        return images
-    @classmethod
-    def get_project_by_user(cls,user_id):
-        projects = Post.objects.filter(user_id=user_id)
-        return projects
-    def _str_(self):
-        return self.user.username
+        
 
-    @classmethod
-    def get_single_project(cls, id):
-        image = cls.objects.get(id=id)
-        return image
+class Business(models.Model):
+     name=models.CharField(max_length=50, blank=True)
+     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)   
+     location =models.CharField(max_length=50, blank=True)
+     contact = models.IntegerField(default=0,max_length=50, blank=True)
+     image = CloudinaryField('image')
+     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='member',blank=True)
 
-    def _str_(self):
-        return self.title 
+
+     def __str__(self):
+        return f'{self.user.username} Business'
+
+     def create_business(self):
+        self.save()
+
+     def delete_business(self):
+        self.delete()
+
+
+
