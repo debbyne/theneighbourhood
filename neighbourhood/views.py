@@ -44,10 +44,8 @@ def loginrequest(request):
 
 @login_required(login_url='/accounts/login')
 def index(request):
-    title = "Hoods"
-    current_user = User.objects.exclude(id=request.user.id)
-    posts = models.Post.objects.filter(hood=current_user.neighborhood)
-    return render(request, 'index.html',{'title':title,'user':current_user,'posts':posts})
+    posts = Neighbourhood.objects.all()
+    return render(request, 'index.html',{'posts':posts})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -60,10 +58,7 @@ def profile(request):
             profile=profileForm.save(commit=FALSE)
             profile.save()
         else:
-        
             profileForm = UpdateUserProfileForm()
-
-
     return render(request,'profile.html',{'current_user':current_user,'post':posts,'profileForm':profileForm})
 
 def logoutUser(request):
@@ -79,7 +74,6 @@ def search_results(request):
         message = f"{search_term}"
 
         return render(request, 'search.html',{"message":message, 'profile':searched_username})
-
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
