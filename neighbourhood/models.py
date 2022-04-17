@@ -39,7 +39,7 @@ class Profile(models.Model):
      location =models.CharField(max_length=50, blank=True)
      neighbourhood_name =  models.CharField(max_length=50, blank=True)
      house=models.CharField(max_length=50, blank=True)
-     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='member',blank=True)
+     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='hood',blank=True)
      def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -87,11 +87,11 @@ class Post(models.Model):
 
 class Business(models.Model):
      name=models.CharField(max_length=50, blank=True)
-     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)   
+     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,related_name='owner')   
      location =models.CharField(max_length=50, blank=True)
-     contact = models.IntegerField(default=0,max_length=50, blank=True)
+     contact = models.IntegerField(default=0, blank=True)
      image = CloudinaryField('image')
-     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='member',blank=True)
+     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='business',blank=True)
      email=models.EmailField(max_length=50, blank=True)
 
 
