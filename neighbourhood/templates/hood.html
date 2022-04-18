@@ -73,43 +73,142 @@
             </div>
            
           </div> 
-          
+      
+          <div class="form-group">
+            <a href="{% url 'neighbourhood:newHoodForm' %}">
+              <input class="btn btn-secondary" id="add_input" type="submit" value="post"  placeholder="Add New Hood" >
+            </a>
 
-
+          </div>
+           
 <div class="container-fluid">
     <div class="container-xl">
-     <div class="row d-flex justify-content-center">
-       <div class="col-md-7">
+     <div class="row ">
+        {% for hood in hoods %}
+       <div class="col-md-4">
+        <div class="inside mx-5 ">
+        <div class="card my-4" style="width: 26rem;height: 26rem ;" >
 
-        <div class="card my-4" style="width: 38rem;margin-bottom: 6px;">
-
-          {% for hood in hoods %}
-          <h2>hsahdh</h2>
-            
            <div class="header">
-            <h5 class="card-title">{{hood.name}}</h5>
+            <h5 class="card-title">
+                {{hood.name}} <br>
+                {{hood.location}} 
+            </h5>
            </div>
-        
-   
-          <div class="row ">
-            <div class="col">
-             
-              <img id="image" class="card-img" src="{{hood.image.url}}" alt="image" width="">
-            
-            </div>
-          </div>
-            <p class="card-text"></p>
-            <div class="card-body">
+    
+              <img id="image" class="card-img" src="{{hood.image.url}}" alt="image" width="210px" height="210px">
            
+            <p class="card-text">
+                {{hood.description}} <br>
+              Total number of Occupants:  {{hood.occupants_count}} <br>
+              <a href="">
+                <button type="button" class="btn btn-info">
+                
+                    Join Hood
+                  </button>
+              </a>
+            
+            </p>
+            <div class="card-body">
+               
           </div>
+           
+        </div>
+
+    </div>
+        </div>
           {% endfor %}
       
           
-        </div>
+        
        </div>
-       
+    </div>
      
        </div>
      </div>
     </div>
+    <style>
+          *{
+           
+           padding: 0px;
+           margin: 0px;
+          
+       }
+      
+       .navbar-header a{
+       color: white;
+       font-size: 25px;
+       }
+       .enclose{
+           display: flex;
+           flex-direction: column;
+          
+       }
+       .upper{
+         width: 660px;
+         height: 40px;
+         color: white;
+       }
+       .card{
+           color: black;
+           margin: 0px;
+           border: none;
+           padding-bottom: 0px;
+           transition: all .3s;
+           margin-right: 180px;
+       }
+       .card:hover{
+         transform: scale(1.04);
+       }
+       .glyphicon{
+         color: white;
+       }
+       .backg{
+       height: 1100px;
+       background-image: url(/media/images/hood1.jpeg);
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+         
+       }
+       .overlay{
+         background: rgb(0, 0, 0, .8);
+         height:100vh;
+       }
+       .post{
+       background-color: aqua;
+       }
+
+     #search_input{
+       background-color: rgb(250, 246, 246);
+       border: none;
+
+     }
+     #add_input{
+       background-color: rgb(248, 248, 248);
+       color: rgb(170, 169, 169);
+       width: 110px;
+       height: 160%;
+       /* margin-right: 180px; */
+       margin-top: 16px;
+     }
+    .dropd{
+      padding-top: 15px;
+      margin-right: 8px;
+     color: white;
+    }
+     .dropd a{
+       color: white;
+     }
+   
+     .row{
+         margin-top: 100px;
+     }
+     .card-text{
+        text-align: center;
+     }
+     .header h5{
+         text-align: center;
+     }
+    </style>
     {% endblock %}
