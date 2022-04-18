@@ -1,5 +1,5 @@
 # from django.forms import ModelForm
-from .models import Profile,Post,Business
+from .models import Neighbourhood, Profile,Post,Business
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -41,4 +41,14 @@ class PostForm(forms.ModelForm):
             'title',
            
             
+        ]
+class newHoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighbourhood
+        fields = [
+            'image',
+            'name',
+            'description',
+            'location',
+            'occupants_count'
         ]
