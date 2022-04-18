@@ -88,3 +88,19 @@ def hood(request):
     except ObjectDoesNotExist:
         raise Http404()
     return render(request, 'hood.html', {'hoods':hoods,})
+
+@login_required(login_url='login')
+def newHoodForm(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = newHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            user = current_user
+            image.save()
+            
+            return redirect('hood')
+
+    else:
+        form = newHoodForm()
+    return render(request, 'newhood.html', {"form": form})
