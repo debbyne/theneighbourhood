@@ -101,12 +101,16 @@
             <p class="card-text">
                 {{hood.description}} <br>
               Total number of Occupants:  {{hood.occupants_count}} <br>
-              <a href="">
-                <button type="button" class="btn btn-info">
-                
-                    Join Hood
-                  </button>
-              </a>
+
+              {% if request.user.profile.neighbourhood == hood %}
+            <a href="{% url 'leave-hood' hood.id %}" class="btn btn-info">Leave Hood</a>
+
+            <a href="{% url 'single-hood' user.profile.neighbourhood.id %}" class="btn btn-info">Checkout {{user.profile.neighbourhood.name}} 
+            </a>
+            {% elif not request.user.profile.neighbourhood %}
+            <a href="{% url 'join-hood' hood.id %}" class="btn btn-info"> Join Hood</a>
+            {% endif %}
+              
             
             </p>
             <div class="card-body">
