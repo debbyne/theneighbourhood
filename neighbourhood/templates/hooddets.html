@@ -73,21 +73,23 @@
             </div>
            
           </div> 
-      
-          <div class="form-group">
+          <div class="form-group" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <a href="">
-              <input class="btn btn-secondary" id="add_input" type="submit" value="post"  placeholder="Add New Hood" >
+              <input class="btn btn-secondary" id="add_input" type="submit"  value="Add Business" placeholder="Add New business" >
             </a>
 
           </div>
+    </div>
+</div>
            
+</div>
 <div class="container-fluid">
     <div class="container-xl">
      <div class="row ">
         {% for hood in hoods %}
-       <div class="col-md-4">
-        <div class="inside mx-5 ">
-        <div class="card my-4" style="width: 26rem;height: 26rem ;" >
+       <div class="">
+        <div class="inside  ">
+        <div class="card my-4" style="width: 55rem;height: 45rem ;" >
 
            <div class="header">
             <h5 class="card-title">
@@ -96,21 +98,15 @@
             </h5>
            </div>
     
-              <img id="image" class="card-img" src="{{hood.image.url}}" alt="image" width="210px" height="210px">
+              <img id="image" class="card-img" src="{{hood.image.url}}" alt="image" width="320px" height="380px">
            
             <p class="card-text">
                 {{hood.description}} <br>
               Total number of Occupants:  {{hood.occupants_count}} <br>
 
-             
-
             </p>
             <div class="card-body">
-                <a href="{% url 'neighbourhood:hooddetails' %}">
-                    <button type="button" class="btn btn-info">
-                        View Hood Details
-                      </button>
-                 </a> 
+               
           </div>
            
         </div>
@@ -123,86 +119,96 @@
         
        </div>
     </div>
-     
-       </div>
+</div>
+</div>
+<div class="container-xl">
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">New Business</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
      </div>
-    </div>
-   
+     <div class="modal-body">
+     
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary">Save changes</button>
+     </div>
+   </div>
+ </div>
+</div> 
 
-    <style>
-          *{
-           
-           padding: 0px;
-           margin: 0px;
-       }
-      
-       .navbar-header a{
-       color: white;
-       font-size: 25px;
-       }
-       .enclose{
-           display: flex;
-           flex-direction: column;
-          
-       }
-       .upper{
-         width: 660px;
-         height: 40px;
-         color: white;
-       }
-       .card{
-           color: black;
-           margin: 0px;
-           border: none;
-           padding-bottom: 0px;
-           transition: all .3s;
-           margin-right: 180px;
-       }
-       .card:hover{
-         transform: scale(1.04);
-       }
-       .glyphicon{
-         color: white;
-       }
-       .backg{
-       height: 1100px;
-       background-image: url(/media/images/hood1.jpeg);
-       background-size: cover;
-       background-position: center;
-       background-repeat: no-repeat;
-         
-       }
-       .overlay{
-         background: rgb(0, 0, 0, .8);
-         height:100vh;
-       }
-       .post{
-       background-color: aqua;
-       }
-
-     #search_input{
-       background-color: rgb(250, 246, 246);
-       border: none;
-
-     }
-     #add_input{
-       background-color: rgb(248, 248, 248);
-       color: rgb(170, 169, 169);
-       width: 110px;
-       height: 160%;
-       margin-top: 16px;
-     }
-    .dropd{
-      padding-top: 15px;
-      margin-right: 8px;
-     color: white;
+ </div>
+<style>
+    *{
+       
+        padding: 0px;
+        margin: 0px;
+        color: black;
     }
-     .dropd a{
-       color: white;
-     }
    
-     .row{
-         margin-top: 100px;
+    .navbar-header a{
+    color: rgb(19, 18, 18);
+    font-size: 25px;
+    }
+    .enclose{
+        display: flex;
+        flex-direction: column;
+       
+    }
+    .upper{
+      width: 660px;
+      height: 40px;
+    }
+    .card{
+        margin: 0px;
+        border: none;
+        padding-bottom: 0px;
+        
+    }
+   
+    .glyphicon{
+      color: white;
+    }
+    .backg{
+    height: 1100px;
+   background-color: rgb(178, 179, 179);
+      
+    }
+    .overlay{
+      background: rgb(0, 0, 0, .4);
+      height:100vh;
+    }
+    .post{
+    background-color: aqua;
+    }
+
+  #search_input{
+    background-color: rgb(250, 246, 246);
+    border: none;
+
+  }
+  #add_input{
+    background-color: rgb(248, 248, 248);
+    color: rgb(170, 169, 169);
+    width: 110px;
+    height: 160%;
+    margin-top: 16px;
+  }
+ .dropd{
+   padding-top: 15px;
+   margin-right: 8px;
+  color: white;
+ }
+  .dropd a{
+    color: white;
+  }
+  .row{
+         margin-top: 50px;
+         margin-left: 210px;
      }
      .card-text{
         text-align: center;
@@ -210,7 +216,8 @@
      .header h5{
          text-align: center;
      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    {% endblock %}
+{% endblock %}

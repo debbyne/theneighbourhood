@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UpdateUserProfileForm, PostForm
+from .forms import SignUpForm, UpdateUserProfileForm, newHoodForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, get_object_or_404
@@ -89,20 +89,9 @@ def hood(request):
         raise Http404()
     return render(request, 'hood.html', {'hoods':hoods,})
 
-@login_required(login_url='/accounts/login')
-def newHoodForm(request):
-   
-    if request.method == 'POST':
-        form = newHoodForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            hood= form.save(commit=False)
-            hood.admin = request.user.profile
-            hood.save()
-            
-            return redirect('hood')
-
-    else:
-        form = newHoodForm()
-
-    return render(request, 'newhood.html', {"form": form})
+def hooddetails(request):
+    try:
+            hoods = Neighbourhood.objects.all()
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request, 'hooddets.html', {'hoods':hoods,})

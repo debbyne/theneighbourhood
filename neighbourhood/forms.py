@@ -50,5 +50,15 @@ class newHoodForm(forms.ModelForm):
             'name',
             'description',
             'location',
-            'occupants_count'
+            'occupants_count',
+        ]
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = [
+            'name',            
+            'location',
+            'email',
+            'contact',
         ]
