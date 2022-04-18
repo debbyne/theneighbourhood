@@ -1,3 +1,81 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block styles %}
+{% load static %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+{% endblock%}
+{% block content %}
+<div class="backg">
+  <div class="overlay">
+<div class="container-fluid">
+  <div class="enclose">
+    <div class="navbar  sticky-top" role="navigation">
+      <div class="container-fluid upper">
+        
+          <div class="navbar-header">
+             <h1>
+              <a class="navbar-brand" href="{% url 'neighbourhood:index' %}"> THEE HOOD</a>
+            </div>
+             </h1>
+        <div class="list">
+
+     <form class="navbar-form" role="search" action="{% url 'neighbourhood:search_results' %}">
+            <div class="input-group">
+              <div class="search">
+              
+              <a href="{% url 'neighbourhood:index' %}">
+                
+                <input  id="search_input" type="text"  placeholder="Search business..." >
+                <i class="fa fa-search" style="font-size:12px"></i>
+                <label  value="submit" for="search-input"><span class="glyphicon glyphicon-search search-icon"></span></label>
+            
+              </a>
+            </div>
+                </div>
+            </div>
+     </form>
+         
+          <div class="home-icon">
+                <a href="{% url 'neighbourhood:index' %}">
+                  <h1> </h1>
+                  <i class="fa fa-home" style="font-size:22px"></i>
+                </a>
+              
+              </div>
+         </div>
+              
+              <div class="dropdown">
+                <div class="dropd">
+                <a href="#" class="dropdown-toggle btn btn-default" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                  <i id="greyi" class="fa fa-user" style="font-size:22px"></i>
+                          <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <img src="" alt="image">
+                  </li>
+                  <li>
+                    <a class="drop" href="{%url 'neighbourhood:profile'%}">Profile</a>
+                  </li>
+                 
+                  <li>
+                    <a class="drop" href="/accounts/logout">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </div>
+           
+          </div> 
+          
+
+
 <div class="container-fluid">
     <div class="container-xl">
      <div class="row d-flex justify-content-center">
@@ -5,31 +83,24 @@
 
         <div class="card my-4" style="width: 38rem;margin-bottom: 6px;">
 
-          {% for image in images %}
+          {% for hood in hoods %}
           <h2>hsahdh</h2>
             
            <div class="header">
-            <h5 class="card-title">{{neighbourhood.name}}</h5>
+            <h5 class="card-title">{{hood.name}}</h5>
            </div>
         
    
           <div class="row ">
             <div class="col">
              
-              <img id="image" class="card-img" src="{{image.image.url}}" alt="image" width="">
+              <img id="image" class="card-img" src="{{hood.image.url}}" alt="image" width="">
             
             </div>
           </div>
-            <p class="card-text">{{}}</p>
+            <p class="card-text"></p>
             <div class="card-body">
-              <div class="icons">
-             
-               
-                <i class="fa fa-comment" style="font-size:18px;padding-right: 20px;"></i>
-                <i class="fa fa-telegram" style="font-size:18px;padding-right: 20px;"></i>
-              </div>
-              <b>Liked by: </b>{{image.liked.all.count}} people
-              <input id="comments_input" type="text"  placeholder="Add Comments.." >
+           
           </div>
           {% endfor %}
       
@@ -41,3 +112,4 @@
        </div>
      </div>
     </div>
+    {% endblock %}

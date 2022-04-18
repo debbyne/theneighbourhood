@@ -8,6 +8,10 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib import messages
 from .models import Post,Neighbourhood,Profile,Business 
 from pickle import FALSE
+from django.http import HttpResponse, Http404
+from django.core.exceptions import ObjectDoesNotExist
+
+
 from . import models
 # Create your views here.
 def SignUp(request):
@@ -77,3 +81,10 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
+
+def hood(request):
+    try:
+            hoods = Neighbourhood.objects.all()
+    except ObjectDoesNotExist:
+        raise Http404()
+    return render(request, 'hood.html', {'hoods':hoods,})
