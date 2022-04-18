@@ -12,7 +12,8 @@
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 {% endblock%}
 {% block content %}
-
+<div class="backg">
+  <div class="overlay">
 <div class="container-fluid">
   <div class="enclose">
     <div class="navbar  sticky-top" role="navigation">
@@ -31,7 +32,7 @@
               
               <a href="{% url 'neighbourhood:index' %}">
                 
-                <input  id="search_input" type="text"  placeholder="Search..." >
+                <input  id="search_input" type="text"  placeholder="Search business..." >
                 <i class="fa fa-search" style="font-size:12px"></i>
                 <label  value="submit" for="search-input"><span class="glyphicon glyphicon-search search-icon"></span></label>
             
@@ -75,7 +76,7 @@
           
           <div class="form-group">
             <a href="">
-              <input class="btn btn-secondary" id="add_input" type="submit" value="post"  placeholder="Add Project" >
+              <input class="btn btn-info" id="add_input" type="submit" value="post"  placeholder="Add Project" >
             </a>
 
           </div>
@@ -83,22 +84,23 @@
     </div>
   </div>
 </div>
-  <div class="container-xl">
-<div class="row">
 
+  <div class="container-xl">
+    <div class="row">
+    <a href="">
+
+      <button type="button" class="btn btn-info">
+        Join a Hood
+      </button>
+    </a>
+    </div>
+    
+      </div>
+</div>
+  
 </div>
 
-  </div>
-             
-              </div>
-              <div class="col-md-4"></div>
-            </div>
-    </div>
-  
-  </div>
-  </div>
-  </div>
- 
+
 
     <style>
         *{
@@ -110,6 +112,7 @@
        
         .navbar-header a{
         color: rgb(19, 18, 18);
+        font-size: 25px;
         }
         .enclose{
             display: flex;
@@ -132,22 +135,25 @@
         .glyphicon{
           color: white;
         }
-        .row{
-       
-        padding-top: 60px;
+        .backg{
+        height: 1100px;
         background-image: url(/media/images/hood1.jpeg);
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
           
         }
+        .overlay{
+          background: rgb(0, 0, 0, .4);
+          height:100vh;
+        }
         .post{
-        background-color: white;
+        background-color: aqua;
         }
 
       #search_input{
         background-color: rgb(250, 246, 246);
-       
+        border: none;
 
       }
       #add_input{
@@ -166,12 +172,9 @@
       .dropd a{
         color: white;
       }
-      .row btn{
-        border: none;
-        padding: 0px;
-        margin: 0px;
-        background-color: black;
-        color: black;
+      .row button{
+        margin-top: 390px;
+        margin-left: 430px;
       }
       
     </style>

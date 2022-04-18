@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="container-xl">
+     <div class="row d-flex justify-content-center">
+       <div class="col-md-7">
+
+        <div class="card my-4" style="width: 38rem;margin-bottom: 6px;">
+
+          {% for image in images %}
+          <h2>hsahdh</h2>
+            
+           <div class="header">
+            <h5 class="card-title">{{neighbourhood.name}}</h5>
+           </div>
+        
+   
+          <div class="row ">
+            <div class="col">
+             
+              <img id="image" class="card-img" src="{{image.image.url}}" alt="image" width="">
+            
+            </div>
+          </div>
+            <p class="card-text">{{}}</p>
+            <div class="card-body">
+              <div class="icons">
+             
+               
+                <i class="fa fa-comment" style="font-size:18px;padding-right: 20px;"></i>
+                <i class="fa fa-telegram" style="font-size:18px;padding-right: 20px;"></i>
+              </div>
+              <b>Liked by: </b>{{image.liked.all.count}} people
+              <input id="comments_input" type="text"  placeholder="Add Comments.." >
+          </div>
+          {% endfor %}
+      
+          
+        </div>
+       </div>
+       
+     
+       </div>
+     </div>
+    </div>
