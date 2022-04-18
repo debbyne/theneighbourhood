@@ -13,7 +13,7 @@ urlpatterns=[
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('hood/', views.hood, name='hood'),
-    re_path(r'^newHoodForm/$', views.newProjectForm, name='newProjectForm'),
+    re_path(r'^newHoodForm/$', views.newHoodForm, name='newHoodForm'),
 
 
 ]
