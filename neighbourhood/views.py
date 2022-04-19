@@ -100,14 +100,14 @@ def hooddetails(request):
 def business(request):
     current_user = request.user.profile
     if request.method == 'POST':
-        businessform = BusinessForm(request.POST)
-        if businessform.is_valid():
-           businessform.instance.user = current_user
-           businessform.instance.neighborhood = current_user.neighborhood
-           businessform.save()
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+           form.instance.user = current_user
+           form.instance.neighborhood = current_user.neighborhood
+           form.save()
         return redirect('hooddetails')
     else:
-        businessform = BusinessForm()
+        form = BusinessForm()
 
     businesses = models.Business.objects.filter(neighborhood=current_user.neighborhood)
 
@@ -115,7 +115,21 @@ def business(request):
     context = {
         'title': title,
         'business':businesses,
-        'businessform':businessform,
+        'form':form,
     }
 
-    return render(request, 'hooddets.html', context)
+    return render(request, 'hooddets.html', context,{'form':form})
+
+@login_required(login_url='/accounts/login')
+def newHood(request):  
+    if request.method == 'POST':
+        form = newHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood= form.save(commit=False)
+            hood.admin = request.user.profile
+            hood.save() 
+            return redirect('hood')
+    else:
+        form = newHoodForm()
+
+    return render(request, 'newhood.html', {"form": form})

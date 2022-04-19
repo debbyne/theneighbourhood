@@ -14,6 +14,7 @@ urlpatterns=[
     path('accounts/', include('django.contrib.auth.urls')),
     path('hood/', views.hood, name='hood'),
     path('hooddetails/', views.hooddetails, name='hooddetails'),
+    path('newHood/', views.newHood, name='newHood'),
 
 
 ]

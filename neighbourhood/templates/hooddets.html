@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% block styles %}
-{% load static %}
 
+{% load static %}
+{{form.media}}
+
+{% bootstrap_css %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -131,11 +134,12 @@
        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
      </div>
      <div class="modal-body">
-        <form  action="" method="post" enctype="multipart/form-data">
-            {%csrf_token%}
-            {% bootstrap_form businessform %}
-                <input type="submit" class="btn btn-info btn-center" value="Upload " >
-        </form>
+      <form  action="{% url 'neighbourhood:hooddetails'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {% bootstrap_form form%}
+            <input type="submit" class="btn btn-info btn-center" value="Post" >
+    </form>
+
     
      </div>
      <div class="modal-footer">
