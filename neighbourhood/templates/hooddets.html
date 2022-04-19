@@ -131,7 +131,12 @@
        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
      </div>
      <div class="modal-body">
-     
+        <form  action="" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+            {% bootstrap_form businessform %}
+                <input type="submit" class="btn btn-info btn-center" value="Upload " >
+        </form>
+    
      </div>
      <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

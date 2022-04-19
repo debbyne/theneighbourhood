@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, UpdateUserProfileForm, newHoodForm
+from .forms import SignUpForm, UpdateUserProfileForm, newHoodForm,BusinessForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect, get_object_or_404
@@ -95,3 +95,27 @@ def hooddetails(request):
     except ObjectDoesNotExist:
         raise Http404()
     return render(request, 'hooddets.html', {'hoods':hoods,})
+
+@login_required(login_url='login')
+def business(request):
+    current_user = request.user.profile
+    if request.method == 'POST':
+        businessform = BusinessForm(request.POST)
+        if businessform.is_valid():
+           businessform.instance.user = current_user
+           businessform.instance.neighborhood = current_user.neighborhood
+           businessform.save()
+        return redirect('hooddetails')
+    else:
+        businessform = BusinessForm()
+
+    businesses = models.Business.objects.filter(neighborhood=current_user.neighborhood)
+
+    title = 'Businesses'
+    context = {
+        'title': title,
+        'business':businesses,
+        'businessform':businessform,
+    }
+
+    return render(request, 'hooddets.html', context)
