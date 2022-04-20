@@ -89,11 +89,6 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-{% if profileForm.errors  %}
-Password/Username Incorrect
-       {% endif %}
-      </div>
-
      
       <form action="{% url 'neighbourhood:profile' %}"  method="post">
           {% csrf_token %}
