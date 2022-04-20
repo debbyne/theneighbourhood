@@ -35,13 +35,12 @@ class Neighbourhood(models.Model):
 class Profile(models.Model):
      name=models.CharField(max_length=50, blank=True)
      email=models.EmailField(max_length=50, blank=True)
-     user=models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="Profile",null=True)
      location =models.CharField(max_length=50, blank=True)
      neighbourhood_name =  models.CharField(max_length=50, blank=True)
      house=models.CharField(max_length=50, blank=True)
-     neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.SET_NULL, null=True,related_name='hood',blank=True)
      def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.name
 
      @receiver(post_save, sender=User)
      def create_user_profile(sender, instance, created, **kwargs):

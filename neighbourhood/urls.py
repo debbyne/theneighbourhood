@@ -13,9 +13,9 @@ urlpatterns=[
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('hood/', views.hood, name='hood'),
-    path('hooddetails/', views.hooddetails, name='hooddetails'),
+    path('hooddetails/<int:hood_id>', views.hooddetails, name='hooddetails'),
     path('newHood/', views.newHood, name='newHood'),
-
+    path('business/', views.business, name='business'),
 
 ]
 if settings.DEBUG:

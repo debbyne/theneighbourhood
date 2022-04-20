@@ -9,7 +9,7 @@
 {% endblock%}
 {% block content %}
 <div class="container">
-    <form  action="{% url 'neighbourhood:newHood' %}" method="post" enctype="multipart/form-data">
+    <form  action="{% url 'neighbourhood:business'%}" method="post" enctype="multipart/form-data">
         {%csrf_token%}
         {% bootstrap_form form %}
             <input type="submit" class="btn btn-outline-secondary btn-center" value="Upload " >

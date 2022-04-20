@@ -8,61 +8,59 @@
    
 {% endblock%}
 {% block content %}
-
-<div class="container-xl">
+<div class="backg">
+  <div class="overlay">
+<div class="container-fluid">
+  <div class="enclose">
     <div class="navbar  sticky-top" role="navigation">
-      <div class="container-fluid">
+      <div class="container-fluid upper">
+        
           <div class="navbar-header">
              <h1>
-              <a class="navbar-brand" href="/"> THEE HOOD</a>
+              <a class="navbar-brand" href="{% url 'neighbourhood:index' %}"> THEE HOOD</a>
             </div>
              </h1>
-             
-          
         <div class="list">
 
-          <form class="navbar-form" role="search" action="">
+     <form class="navbar-form" role="search" action="{% url 'neighbourhood:search_results' %}">
             <div class="input-group">
               <div class="search">
               
-              <a href="/">
+              <a href="{% url 'neighbourhood:index' %}">
                 
-                <input id="search_input" type="text"  placeholder="Search..." >
-                <i class="fa fa-search" style="font-size:15px"></i>
+                <input  id="search_input" type="text"  placeholder="Search business..." >
+                <i class="fa fa-search" style="font-size:12px"></i>
                 <label  value="submit" for="search-input"><span class="glyphicon glyphicon-search search-icon"></span></label>
             
               </a>
             </div>
                 </div>
             </div>
-          </form>
+     </form>
          
-              <div class="home-icon">
-                <a href="/">
+          <div class="home-icon">
+                <a href="{% url 'neighbourhood:index' %}">
                   <h1> </h1>
-                  <i class="fa fa-home" style="font-size:18px"></i>
+                  <i id="greyi" class="fa fa-home" style="font-size:22px"></i>
                 </a>
               
               </div>
-
-          </div>    
+         </div>
+        
+           
     </div>
-    
-
     <div class="media">
         
         <div class="media-body">
 
-            
-          <h4 class="mt-0">{{user.username}}</h4> <br>
-          <div class="details">
-            <span class="mr-5">{{images.count}} Projects</span>
-           
-          </div>
-          <div class="bio-details">
-              <p>{{ user.profile.bio}}</p>
+          
+              <button class="btn btn-sm btn-secondary"   data-bs-toggle="modal" data-bs-target="#myModal">Update Profile</button> <br>
 
-              <button class="btn btn-sm btn-secondary"   data-bs-toggle="modal" data-bs-target="#myModal">Update Profile</button>
+              <h4>Profile Details</h4> <br>
+                  {{profile.user}} <br>
+                  {{profile.location}} <br>
+                  {{profile.neighbourhood_name}}
+              
           </div>
 
           <div class="prof">
@@ -73,25 +71,7 @@
         </div>
       </div>
 
-<div class="container">
-  <div class="container-fluid">
-<div class="col-md-4"></div>
-<div class="row">
-<div class="col-md-8 my-5 ">
-  {% for project in projects%}
-  <div class="card" style="width: 28rem; margin-bottom: 10px;">
-    <div class="card-body">
-      <h5 class="card-title">{{project.title}}</h5>
-      <img id="image" class="modal-img" src="" alt="image" width="70%" height="100%">
-      <p class="text-center"> {{project.description}}</p>
-      <a href="#" class="card-link">{{project.url}}</a>
-    </div>
-  </div>
-  
-  
-          {% endfor %}
-    </div>
-  </div>
+
     <div class="col-md-4"></div>
   </div>
 </div>
@@ -115,7 +95,7 @@ Password/Username Incorrect
       </div>
 
      
-      <form action="{% url 'awards:profile' %}"  method="post">
+      <form action="{% url 'neighbourhood:profile' %}"  method="post">
           {% csrf_token %}
         {% bootstrap_form profileForm %}
         <div class="form-group">
@@ -135,12 +115,54 @@ Password/Username Incorrect
 </div>
 </div>
 <style>
-    *{
-      background-color: black;
-      color: white;
-    }
+     *{
+           
+          padding: 0px;
+          margin: 0px;
+          color: white;
+       }
+       .drop{
+       color: black;
+     }
+       .navbar-header a{
+       color: white;
+       font-size: 25px;
+       }
+       .enclose{
+           display: flex;
+           flex-direction: column;
+          
+       }
+       .upper{
+         width: 660px;
+         height: 40px;
+       }
+       .card{
+           margin: 0px;
+           border: none;
+           padding-bottom: 0px;
+           transition: all .3s;
+       }
+       .card:hover{
+         transform: scale(1.04);
+       }
+       .glyphicon{
+         color: white;
+       }
+       .backg{
+       height: 1100px;
+       background-image: url(/media/images/hood1.jpeg);
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+         
+       }
+       .overlay{
+         background: rgb(0, 0, 0, .8);
+         height:100vh;
+       }
     .media{
-        padding-left: 950px;
+        padding-left: 320px;
         font-family: 'Roboto', sans-serif;
         font-size: 21px;
         color: white;
@@ -176,7 +198,7 @@ Password/Username Incorrect
     }
    
     .container-fluid{
-        font-size: 18px;
+      font-size: 18px;
       margin-left: 40px;
       margin-right: 250px;
       display: flex;
@@ -197,10 +219,11 @@ Password/Username Incorrect
       padding-left: 21%;
     }
     .navbar{
-      background-color: black;
       color: white;
     }
-   
+   .media-body btn{
+     background-color: white;
+   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

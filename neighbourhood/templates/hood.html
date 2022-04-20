@@ -75,8 +75,8 @@
           </div> 
       
           <div class="form-group">
-            <a href="">
-              <input class="btn btn-secondary" id="add_input" type="submit" value="post"  placeholder="Add New Hood" >
+            <a href="{% url 'neighbourhood:newHood' %}">
+              <input class="btn btn-secondary" id="add_input" type="submit" value="New Hood"  placeholder="Add New Hood" >
             </a>
 
           </div>
@@ -104,13 +104,14 @@
 
             </p>
             <div class="card-body">
-                <a href="{% url 'neighbourhood:hooddetails' %}">
+                <a href="{% url 'neighbourhood:hooddetails' hood.id %}">
                     <button type="button" class="btn btn-info">
                         View Hood Details
                       </button>
                  </a> 
           </div>
            
+
         </div>
 
     </div>
@@ -205,6 +206,9 @@
      }
      .header h5{
          text-align: center;
+     }
+     .form-group btn{
+       color: black;
      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

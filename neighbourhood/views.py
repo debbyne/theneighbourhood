@@ -13,6 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 from . import models
+import neighbourhood
 # Create your views here.
 def SignUp(request):
     if request.method == 'POST':
@@ -54,16 +55,17 @@ def index(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
-    posts = models.Post.objects.filter(hood=current_user.neighborhood)
     profileForm = UpdateUserProfileForm()
     if request.method == 'POST':
         profileForm = UpdateUserProfileForm(request.POST, request.FILES)
         if profileForm.is_valid():
             profile=profileForm.save(commit=FALSE)
+            profile.user = current_user
             profile.save()
         else:
             profileForm = UpdateUserProfileForm()
-    return render(request,'profile.html',{'current_user':current_user,'post':posts,'profileForm':profileForm})
+            profile = Profile.get.all()
+    return render(request,'profile.html',{'current_user':current_user,'profileForm':profileForm,'profile':profile})
 
 def logoutUser(request):
  logout(request)
@@ -89,36 +91,28 @@ def hood(request):
         raise Http404()
     return render(request, 'hood.html', {'hoods':hoods,})
 
-def hooddetails(request):
+def hooddetails(request,hood_id):
     try:
-            hoods = Neighbourhood.objects.all()
+        hood = Neighbourhood.objects.get(id=hood_id)
     except ObjectDoesNotExist:
         raise Http404()
-    return render(request, 'hooddets.html', {'hoods':hoods,})
+    business = Business.objects.all()
+    return render(request, 'hooddets.html', {'hood': hood,'business':business})
 
 @login_required(login_url='login')
 def business(request):
-    current_user = request.user.profile
+    current_user = request.user
     if request.method == 'POST':
         form = BusinessForm(request.POST, request.FILES)
         if form.is_valid():
-           form.instance.user = current_user
-           form.instance.neighborhood = current_user.neighborhood
+           form = form.save(commit=False)
+           form.user = current_user
            form.save()
-        return redirect('hooddetails')
+        return redirect('neighbourhood:hooddetails')
     else:
         form = BusinessForm()
 
-    businesses = models.Business.objects.filter(neighborhood=current_user.neighborhood)
-
-    title = 'Businesses'
-    context = {
-        'title': title,
-        'business':businesses,
-        'form':form,
-    }
-
-    return render(request, 'hooddets.html', context,{'form':form})
+    return render(request, 'business.html',{'form':form})
 
 @login_required(login_url='/accounts/login')
 def newHood(request):  
@@ -126,9 +120,9 @@ def newHood(request):
         form = newHoodForm(request.POST, request.FILES)
         if form.is_valid():
             hood= form.save(commit=False)
-            hood.admin = request.user.profile
+            hood.admin = request.user
             hood.save() 
-            return redirect('hood')
+            return redirect('neighbourhood:hood')
     else:
         form = newHoodForm()
 
