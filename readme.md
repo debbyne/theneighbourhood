@@ -4,7 +4,7 @@
 Debbyne Kinya
 
 # Preview of the page
-![Landing page photo](https://github.com/debbyne/awards/blob/master/media/images/Screenshot%20from%202022-04-12%2014-19-45.png)
+![Landing page photo](https://github.com/debbyne/theneighbourhood/blob/master/media/images/Screenshot%20from%202022-04-20%2013-34-41.png)
 # Description
 The user can be able to :\
 1.Sign in with the application to start using.\
@@ -22,9 +22,8 @@ django-bootstrap
 
 # Setup
 In Terminal:
-git clone  https://github.com/debbyne/awards.git
-
-  # cd AWARDS
+git clone  https://github.com/debbyne/theneighbourhood.git
+  # cd HOOD
  code .\
 Create a .env file.\
 
