@@ -64,7 +64,7 @@ def profile(request):
             profile.save()
         else:
             profileForm = UpdateUserProfileForm()
-            profile = Profile.get.all()
+        profile = Profile.get.all()
     return render(request,'profile.html',{'current_user':current_user,'profileForm':profileForm,'profile':profile})
 
 def logoutUser(request):
